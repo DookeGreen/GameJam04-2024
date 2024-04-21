@@ -43,7 +43,8 @@ public class RandomRectTransformSpawner : MonoBehaviour
         // Spawn the object at the random position
         spawnedObject = Instantiate(bar, parentRectTransform);
         spawnedObject.localPosition = randomPosition;
-        spawnedObject.localScale = new Vector3(0.33f / pointObj.GetComponent<WoodCutting>().runs, 1f, 1f);
+        try{spawnedObject.localScale = new Vector3(0.33f / pointObj.GetComponent<WoodCutting>().runs, 1f, 1f);}
+        catch{spawnedObject.localScale = new Vector3(0.33f, 1f, 1f);}
     }
 
 }

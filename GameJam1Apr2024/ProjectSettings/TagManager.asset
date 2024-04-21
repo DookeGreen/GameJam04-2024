@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Zone
+  - HeatSource
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - HeatSource
   - Water
   - UI
   - 
