@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 public class OnPressE : MonoBehaviour
 {
     public GameObject Game;
     public GameObject Player;
     public GameObject ExclamationPoint;
     public string NecessaryEquippedItem;
+    private int Activity;
+    public int ActivityNum;
     public object ScriptName;
     public float timer;
     public bool done = true;
@@ -15,6 +18,7 @@ public class OnPressE : MonoBehaviour
     private GameObject exclamation;
     [SerializeField] SpriteRenderer sr;
     [SerializeField] private int score;
+    public TextMeshProUGUI ErrorTXT;
     private bool timerStart;
     private bool timerDone = false;
     private bool GameStart;
@@ -55,15 +59,19 @@ public class OnPressE : MonoBehaviour
             {
                 timerStart2 = true;
                 exclamation = Instantiate(ExclamationPoint, transform);
+                Activity = 4;
+                transform.parent.GetComponentInChildren<Animator>().SetInteger("Activity", Activity);
             }
             timerDone = false;
         }
         if(Input.GetKeyDown(KeyCode.E) && done && transform.parent.GetComponent<Inventory>().EquippedItem == NecessaryEquippedItem)
         {
+            Activity = ActivityNum;
             if(transform.parent.GetComponent<Inventory>().EquippedItem == "Pan")
             {
                 if(transform.parent.GetComponent<Inventory>().fishQuantity > 0)
                 {
+                    transform.parent.GetComponentInChildren<Animator>().SetInteger("Activity", Activity);
                     done = false;
                     GameStart = false;
                     Player.GetComponent<PlayerMovement>().canMove = false;
@@ -74,10 +82,15 @@ public class OnPressE : MonoBehaviour
                         spawnedObject = Instantiate(Game, transform);
                     }
                 }
+                else
+                {
+                    ErrorTXT.text = "Not enough fish!";
+                }
 
             }
             else
             {
+                transform.parent.GetComponentInChildren<Animator>().SetInteger("Activity", Activity);
                 done = false;
                 GameStart = false;
                 Player.GetComponent<PlayerMovement>().canMove = false;
@@ -89,6 +102,10 @@ public class OnPressE : MonoBehaviour
                 }
             }
 
+        }
+        else if(Input.GetKeyDown(KeyCode.E) && done)
+        {
+            ErrorTXT.text = "Wrong item equipped!";
         }
         if(spawnedObject != null)
         {
@@ -129,6 +146,8 @@ public class OnPressE : MonoBehaviour
     }
     void Thing()
     {
+        Activity = 0;
+        transform.parent.GetComponentInChildren<Animator>().SetInteger("Activity", Activity);
         if(spawnedObject.GetComponentInChildren<WoodCutting>() != null)
         {
             score = spawnedObject.GetComponentInChildren<WoodCutting>().score;

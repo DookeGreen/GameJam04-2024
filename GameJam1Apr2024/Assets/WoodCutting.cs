@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WoodCutting : MonoBehaviour
 {
+    [SerializeField] GameObject Plus;
     [SerializeField] private Transform Parent;
     [SerializeField] private GameObject Zone;
     [SerializeField] private GameObject Spawner;
@@ -26,6 +27,7 @@ public class WoodCutting : MonoBehaviour
 
     void Update()
     {
+         
         Zone = GameObject.FindWithTag("Zone");
         movementSpeed += (Time.deltaTime * 0.025f);
         // Move the cutting tool back and forth
@@ -60,6 +62,11 @@ public class WoodCutting : MonoBehaviour
         if(Zone.transform.GetComponent<Collider2D>().OverlapPoint(point)){
             runs += 1;
             score += 1;
+            if(score % 2 == 1)
+            {
+                Vector3 spawnPosition = transform.position + new Vector3(250f, 250f, 0f);
+                GameObject plus = Instantiate(Plus, spawnPosition, Quaternion.identity);
+            }
             stopped = false;
             Spawner.GetComponent<RandomRectTransformSpawner>().Spawn();
             return true;

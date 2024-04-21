@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
         woodTXT.text = woodQuantity.ToString();
         fishTXT.text = fishQuantity.ToString();
         coockedfishTXT.text = coockedfishQuantity.ToString();
-
+        
         for (int i = 0; i < Items.Length; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i) && i < Items.Length)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DetectPlayerFishing : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class DetectPlayerFishing : MonoBehaviour
     [SerializeField] private GameObject Game;
     [SerializeField] private GameObject ExclamationPoint;
     [SerializeField] private string NecessaryEquippedItem;
+    [SerializeField] private int Activity;
     [Range(0f, 10f)]
     [SerializeField] private float MaxFishingTime;
     public Fishing ScriptName;
     private GameObject spawnedObject;
+    [SerializeField] private TextMeshProUGUI ErrorTXT;
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -25,7 +29,9 @@ public class DetectPlayerFishing : MonoBehaviour
             spawnedObject.GetComponent<OnPressE>().Player = col.gameObject;
             spawnedObject.GetComponent<OnPressE>().timer = Random.Range(0f, MaxFishingTime);
             spawnedObject.GetComponent<OnPressE>().ExclamationPoint = ExclamationPoint;
+            spawnedObject.GetComponent<OnPressE>().ActivityNum = Activity;
             spawnedObject.GetComponent<OnPressE>().NecessaryEquippedItem = NecessaryEquippedItem;
+            spawnedObject.GetComponent<OnPressE>().ErrorTXT = ErrorTXT;
             Debug.Log("Player Entered");
         }
     }

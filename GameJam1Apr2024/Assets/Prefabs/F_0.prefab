@@ -97,3 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e5989d626b60f47aa916fe99f3dea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FirePlace: {fileID: 0}
+  WoodFuelValue: 0
+  Minus: {fileID: 8976640024527344399, guid: 28af1e6798c223c4a812c3ea82bbf5d6, type: 3}

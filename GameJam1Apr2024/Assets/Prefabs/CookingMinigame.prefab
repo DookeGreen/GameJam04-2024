@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTimer: 10
+  Plus: {fileID: 3362999042008481498, guid: 70fc358c6b676f74ab9d605e06acca25, type: 3}
+  Minus: {fileID: 7619072341798652222, guid: 383c3faa745981843b7d8e3c31601c35, type: 3}
   rb: {fileID: 1775914278698212325}
   MoveSpeed: 11
   CookTime: 4

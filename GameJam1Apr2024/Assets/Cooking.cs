@@ -6,6 +6,8 @@ public class Cooking : MonoBehaviour
 {
     [Range(0f, 10f)]
     [SerializeField] private float GameTimer;
+    [SerializeField] private GameObject Plus;
+    [SerializeField] private GameObject Minus;
     [SerializeField] private Rigidbody2D rb;
     [Range(0f, 20f)]
     [SerializeField] private float MoveSpeed;
@@ -30,6 +32,10 @@ public class Cooking : MonoBehaviour
         if(CurrentCookTime >= CookTime)
         {
             score = 1;
+            Vector3 spawnPosition = GameObject.FindWithTag("Player").transform.position + new Vector3(625, 300, 0f);
+            GameObject minus = Instantiate(Minus, spawnPosition, Quaternion.identity);
+            Vector3 spawnPosition1 = GameObject.FindWithTag("Player").transform.position + new Vector3(600, 500, 0f);
+            GameObject plus = Instantiate(Plus, spawnPosition1, Quaternion.identity);
             finished = true;
         }
         if(!finished)

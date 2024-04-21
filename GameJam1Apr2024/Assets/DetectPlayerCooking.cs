@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DetectPlayerCooking : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class DetectPlayerCooking : MonoBehaviour
     [SerializeField] private GameObject PressF;
     [SerializeField] private GameObject FuelBar;
     [SerializeField] private GameObject Game;
+    [SerializeField] private int Activity;
+    [SerializeField] private TextMeshProUGUI ErrorTXT;
     [SerializeField] private string NecessaryEquippedItem;
     [Range(0f, 100f)]
     [SerializeField] private float WoodFuelValue;
@@ -68,12 +71,15 @@ public class DetectPlayerCooking : MonoBehaviour
 
             spawnedObject = Instantiate(PressE, spawnPosition, Quaternion.identity, col.gameObject.transform);
             spawnedObject.GetComponent<OnPressE>().Game = Game;
+            spawnedObject.GetComponent<OnPressE>().ActivityNum = Activity;
             spawnedObject.GetComponent<OnPressE>().Player = col.gameObject;
             spawnedObject.GetComponent<OnPressE>().NecessaryEquippedItem = NecessaryEquippedItem;
+            spawnedObject.GetComponent<OnPressE>().ErrorTXT = ErrorTXT;
             Debug.Log("Player Entered");
             spawnedObject1 = Instantiate(PressF, spawnPosition1, Quaternion.identity, col.gameObject.transform);
             spawnedObject1.GetComponent<OnPressF>().FirePlace = this;
             spawnedObject1.GetComponent<OnPressF>().WoodFuelValue = WoodFuelValue;
+            spawnedObject1.GetComponent<OnPressE>().ErrorTXT = ErrorTXT;
         }
     }
     void OnTriggerExit2D(Collider2D col)

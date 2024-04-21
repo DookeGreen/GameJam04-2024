@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class DetectPlayerWood : MonoBehaviour
 {
     [SerializeField] private GameObject PressE;
     [SerializeField] private GameObject Game;
     [SerializeField] private string NecessaryEquippedItem;
+    [SerializeField] private int Activity;
     public WoodCutting ScriptName;
     private GameObject spawnedObject;
+    [SerializeField] private TextMeshProUGUI ErrorTXT;
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -20,7 +22,9 @@ public class DetectPlayerWood : MonoBehaviour
             spawnedObject = Instantiate(PressE, spawnPosition, Quaternion.identity, col.gameObject.transform);
             spawnedObject.GetComponent<OnPressE>().Game = Game;
             spawnedObject.GetComponent<OnPressE>().Player = col.gameObject;
+            spawnedObject.GetComponent<OnPressE>().ActivityNum = Activity;
             spawnedObject.GetComponent<OnPressE>().NecessaryEquippedItem = NecessaryEquippedItem;
+            spawnedObject.GetComponent<OnPressE>().ErrorTXT = ErrorTXT;
             Debug.Log("Player Entered");
         }
     }

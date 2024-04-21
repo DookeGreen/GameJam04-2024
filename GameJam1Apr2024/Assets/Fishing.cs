@@ -8,6 +8,7 @@ public class Fishing : MonoBehaviour
     public bool finished;
     [Range(0f, 10f)]
     [SerializeField] private float GameTimer;
+    [SerializeField] private GameObject Plus;
     [Range(0f, 10f)]
     [SerializeField] private float BarDegen;
     [Range(0f, 10f)]
@@ -25,6 +26,8 @@ public class Fishing : MonoBehaviour
         TimerBar.transform.localScale = new Vector3(1f, GameTimer/currentTime, 1f);
         if(transform.localScale.y >= 1){
             finished = true;
+            Vector3 spawnPosition = GameObject.FindWithTag("Player").transform.position + new Vector3(250f, 250f, 0f);
+            GameObject plus = Instantiate(Plus, spawnPosition, Quaternion.identity);
             score = 1;
         }
         if(!finished)

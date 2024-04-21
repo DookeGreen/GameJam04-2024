@@ -193,6 +193,7 @@ MonoBehaviour:
   score: 0
   finished: 0
   GameTimer: 5
+  Plus: {fileID: 7532212683322516529, guid: 0497aae4f36d4a741a499567408b7658, type: 3}
   BarDegen: 0.3
   BarIncrease: 0.1
   TimerBar: {fileID: 8906687655164178502}

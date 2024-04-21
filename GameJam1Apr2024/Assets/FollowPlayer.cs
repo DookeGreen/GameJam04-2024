@@ -1,42 +1,38 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private float zoomSpeed = 5f;
-    [SerializeField] private float targetZoom = 3000f;
 
-    private void Start()
+    [SerializeField] private float zoomSpeed = 5f; // Adjust the speed of the zoom transition
+
+    private float targetZoom;
+    private Camera cam;
+
+    void Start()
     {
-        // Start the zooming coroutine
-        StartCoroutine(ZoomCoroutine());
+        cam = GetComponent<Camera>();
+        targetZoom = cam.orthographicSize; // Start with the current orthographic size
     }
 
-    private IEnumerator ZoomCoroutine()
+    void Update()
     {
-        // Get the current orthographic size of the camera
-        float currentZoom = GetComponent<Camera>().orthographicSize;
-
-        // Loop until the camera reaches the target zoom
-        while (Mathf.Abs(currentZoom - targetZoom) > 0.01f)
+        // Set the target orthographic size based on player movement
+        if (!player.GetComponent<PlayerMovement>().canMove)
         {
-            // Smoothly interpolate between the current zoom and the target zoom
-            currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomSpeed);
-
-            // Update the orthographic size of the camera
-            GetComponent<Camera>().orthographicSize = currentZoom;
-
-            yield return null;
+            targetZoom = 1500f;
         }
-    }
-
-    private void LateUpdate()
-    {
-        // Follow the player with the camera
-        if (player != null)
+        else
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 500f, -10f);
+            targetZoom = 3000f;
         }
+
+        // Smoothly interpolate towards the target orthographic size
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, zoomSpeed * Time.deltaTime);
+
+        // Update camera position
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 500f, -10f);
     }
 }
